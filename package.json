@@ -14,11 +14,11 @@
     "postdev": "cd packages/create-tslib && pnpm link",
     "postinstall": "pnpm run dev",
     "prepare": "pnpm recursive install",
-    "pub": "pnpm recursive exec yarn publish",
+    "pub": "pnpm recursive --workspace-concurrency 1 exec -- yarn publish",
     "presetup": "git clean -fdX",
     "setup": "pnpm install --prefer-offline",
     "sort": "pnpm run sort-package-json",
-    "postsort": "pnpm recursive exec 'sort-package-json'",
+    "postsort": "pnpm recursive exec -- sort-package-json",
     "sort-package-json": "sort-package-json"
   },
   "devDependencies": {

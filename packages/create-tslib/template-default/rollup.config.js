@@ -1,5 +1,5 @@
 const pkg = require('./package.json');
-const bundles = require('tslib-cli');
+const bundles = require('@osdevisnot/tslib-cli');
 const isDev = !!process.env.ROLLUP_WATCH;
 
 const packs = isDev
