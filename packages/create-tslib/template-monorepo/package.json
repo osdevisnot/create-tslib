@@ -1,0 +1,30 @@
+{
+  "name": "template-monorepo",
+  "version": "0.0.0",
+  "private": true,
+  "description": "template-monorepo",
+  "keywords": [
+    "template-monorepo"
+  ],
+  "repository": "username/template-monorepo",
+  "license": "MIT",
+  "author": "username <useremail>",
+  "scripts": {
+    "build": "pnpm recursive build",
+    "coverage": "tslib-cli coverage",
+    "format": "pnpm recursive format",
+    "preinstall": "git clean -fdX",
+    "lint": "pnpm recursive lint",
+    "prepare": "pnpm recursive install",
+    "prepublishOnly": "pnpm recursive lint && pnpm run coverage",
+    "test": "tslib-cli test",
+    "preversion": "pnpm recursive lint",
+    "postversion": "git push --follow-tags"
+  },
+  "prettier": "@osdevisnot/prettier",
+  "devDependencies": {
+    "@types/jest": "^24.0.15",
+    "@types/node": "^12.6.8",
+    "tslib-cli": "^4.0.0"
+  }
+}

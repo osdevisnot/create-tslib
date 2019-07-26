@@ -1,0 +1,13 @@
+{
+  "name": "create-tslib",
+  "version": "0.1.0",
+  "license": "MIT",
+  "bin": {
+    "create-tslib": "cli.js"
+  },
+  "dependencies": {
+    "ncp": "^2.0.0",
+    "readline-sync": "^1.4.9",
+    "replacestream": "^4.0.3"
+  }
+}

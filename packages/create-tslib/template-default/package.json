@@ -1,0 +1,35 @@
+{
+  "name": "template-default",
+  "version": "0.1.0",
+  "description": "template-default",
+  "keywords": [
+    "template-default"
+  ],
+  "repository": "username/template-default",
+  "license": "MIT",
+  "author": "username <useremail>",
+  "main": "dist/template-default.js",
+  "module": "dist/template-default.mjs",
+  "source": "src/index.tsx",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tslib-cli build",
+    "coverage": "tslib-cli coverage",
+    "format": "tslib-cli format",
+    "lint": "tslib-cli lint",
+    "prepare": "tslib-cli build",
+    "prepublishOnly": "tslib-cli lint && tslib-cli coverage",
+    "start": "tslib-cli start",
+    "test": "tslib-cli test",
+    "preversion": "tslib-cli lint",
+    "postversion": "git push --follow-tags",
+    "watch": "tslib-cli watch"
+  },
+  "prettier": "@osdevisnot/prettier",
+  "dependencies": {},
+  "devDependencies": {
+    "@types/jest": "^24.0.15",
+    "@types/node": "^12.6.8",
+    "tslib-cli": "^4.0.0"
+  }
+}
