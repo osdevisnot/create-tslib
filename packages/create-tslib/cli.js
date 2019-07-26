@@ -47,14 +47,14 @@ if (dest) {
     }
     console.log('Done !!');
     if (process.argv[4] === 'link') {
-      exec(`npm install ${path.join(__dirname, '..', 'tslib-cli', 'tslib-cli-4.0.0.tgz')}`, { cwd });
+      exec(`npm install ${path.join(__dirname, '..', 'tslib-cli', 'osdevisnot-tslib-cli-v*.tgz')}`, { cwd });
     }
     exec('git init', { cwd });
     exec(`git config user.name ${username}`, { cwd });
     exec(`git config user.email ${email}`, { cwd });
     exec('git add .', { cwd });
     exec("git commit -am 'fist commit'", { cwd });
-    exec('yarn', { cwd });
+    exec(process.argv[4] === 'link' ? 'npm install' : 'yarn', { cwd });
     process.exit(0);
   });
 } else {

@@ -10,20 +10,19 @@
   "license": "MIT",
   "author": "username <useremail>",
   "scripts": {
-    "build": "pnpm recursive build",
+    "build": "lerna run build",
     "coverage": "tslib-cli coverage",
-    "format": "pnpm recursive format",
-    "preinstall": "git clean -fdX",
-    "lint": "pnpm recursive lint",
-    "prepare": "pnpm recursive install",
-    "prepublishOnly": "pnpm recursive lint && pnpm run coverage",
+    "format": "lerna run format",
+    "lint": "lerna run lint",
+    "prepare": "lerna bootstrap",
+    "prepublishOnly": "yarn lint && yarn coverage",
     "test": "tslib-cli test",
-    "preversion": "pnpm recursive lint",
+    "preversion": "yarn lint",
     "postversion": "git push --follow-tags"
   },
   "prettier": "@osdevisnot/prettier",
   "devDependencies": {
-    "@osdevisnot/tslib-cli": "^4.0.0",
+    "@osdevisnot/tslib-cli": "^0.1.4",
     "@types/jest": "^24.0.15",
     "@types/node": "^12.6.8"
   }

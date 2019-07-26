@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-pnpm run setup
+yarn
 
 cd ~/temp
 
@@ -10,10 +10,10 @@ create-tslib mylib default link
 
 cd mylib
 
-npm run build
-npm run coverage
-npm run format
-npm run lint
+yarn build
+yarn coverage
+yarn format
+yarn lint
 
 # test
 # watch

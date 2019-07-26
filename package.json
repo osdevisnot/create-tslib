@@ -10,18 +10,18 @@
   "license": "MIT",
   "author": "osdevisnot <osdevisnot@gmail.com>",
   "scripts": {
-    "dev": "cd packages/tslib-cli && pnpm pack",
-    "postdev": "cd packages/create-tslib && pnpm link",
-    "postinstall": "pnpm run dev",
-    "prepare": "pnpm recursive install",
-    "pub": "pnpm recursive --workspace-concurrency 1 exec -- yarn publish --no-git-tag-version",
-    "presetup": "git clean -fdX",
-    "setup": "pnpm install --prefer-offline",
-    "sort": "pnpm run sort-package-json",
-    "postsort": "pnpm recursive exec -- sort-package-json",
-    "sort-package-json": "sort-package-json"
+    "prebootstrap": "lerna bootstrap",
+    "bootstrap": "cd packages/tslib-cli && yarn pack",
+    "postbootstrap": "cd packages/create-tslib && npm link",
+    "postinstall": "yarn sort",
+    "prepare": "yarn bootstrap",
+    "pub": "lerna publish",
+    "presort": "sort-package-json",
+    "sort": "cd packages/create-tslib/template-default && sort-package-json",
+    "postsort": "lerna exec 'sort-package-json'"
   },
   "devDependencies": {
+    "lerna": "^3.16.4",
     "sort-package-json": "^1.22.1"
   }
 }
