@@ -14,7 +14,7 @@
     "postdev": "cd packages/create-tslib && pnpm link",
     "postinstall": "pnpm run dev",
     "prepare": "pnpm recursive install",
-    "pub": "pnpm recursive --workspace-concurrency 1 exec -- yarn publish",
+    "pub": "pnpm recursive --workspace-concurrency 1 exec -- yarn publish --no-git-tag-version",
     "presetup": "git clean -fdX",
     "setup": "pnpm install --prefer-offline",
     "sort": "pnpm run sort-package-json",
