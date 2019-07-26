@@ -1,6 +1,6 @@
 {
   "name": "@osdevisnot/create-tslib",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "license": "MIT",
   "bin": {
     "create-tslib": "cli.js"
