@@ -1,6 +1,6 @@
 {
-  "name": "tslib-cli",
-  "version": "4.0.0",
+  "name": "@osdevisnot/tslib-cli",
+  "version": "0.1.0",
   "license": "MIT",
   "main": "rollup.config.js",
   "bin": {
@@ -28,5 +28,8 @@
   "devDependencies": {
     "@types/jest": "^24.0.15",
     "@types/node": "^12.6.8"
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }

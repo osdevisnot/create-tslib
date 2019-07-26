@@ -28,8 +28,8 @@
   "prettier": "@osdevisnot/prettier",
   "dependencies": {},
   "devDependencies": {
+    "@osdevisnot/tslib-cli": "^0.1.0",
     "@types/jest": "^24.0.15",
-    "@types/node": "^12.6.8",
-    "tslib-cli": "^4.0.0"
+    "@types/node": "^12.6.8"
   }
 }
