@@ -45,6 +45,7 @@ if (dest) {
       console.error(err);
       process.exit(1);
     }
+    fs.renameSync(path.join(process.cwd(), dest, 'gitignore'), path.join(process.cwd(), dest, '.gitignore'));
     console.log('Done !!');
     if (process.argv[4] === 'link') {
       exec(`npm install ${path.join(__dirname, '..', 'tslib-cli', 'osdevisnot-tslib-cli-v*.tgz')}`, { cwd });
@@ -52,9 +53,9 @@ if (dest) {
     exec('git init', { cwd });
     exec(`git config user.name ${username}`, { cwd });
     exec(`git config user.email ${email}`, { cwd });
+    exec(process.argv[4] === 'link' ? 'npm install' : 'yarn', { cwd });
     exec('git add .', { cwd });
     exec("git commit -am 'fist commit'", { cwd });
-    exec(process.argv[4] === 'link' ? 'npm install' : 'yarn', { cwd });
     process.exit(0);
   });
 } else {

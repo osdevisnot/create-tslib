@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-yarn
+yarn run setup
 
 cd ~/temp
 

@@ -16,6 +16,9 @@
     "postinstall": "yarn sort",
     "prepare": "yarn bootstrap",
     "pub": "lerna publish",
+    "presetup": "git clean -fdX",
+    "setup": "yarn --prefer-offline",
+    "postsetup": "yarn sort",
     "presort": "sort-package-json",
     "sort": "cd packages/create-tslib/template-default && sort-package-json",
     "postsort": "lerna exec 'sort-package-json'"
