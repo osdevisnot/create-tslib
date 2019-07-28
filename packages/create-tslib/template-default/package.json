@@ -28,7 +28,7 @@
   "prettier": "@osdevisnot/prettier",
   "dependencies": {},
   "devDependencies": {
-    "@osdevisnot/tslib-cli": "^0.1.4",
+    "@osdevisnot/tslib-cli": "^0.1.6",
     "@types/jest": "^24.0.15",
     "@types/node": "^12.6.8"
   }

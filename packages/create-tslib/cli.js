@@ -35,27 +35,43 @@ const transform = (read, write) =>
     .pipe(replaceStream('useremail', email))
     .pipe(write);
 
-if (dest) {
-  const cwd = path.join(process.cwd(), dest);
-  if (fs.existsSync(path.join(process.cwd(), 'package.json'))) {
-    template = 'template-default'; // Running inside an existing project
+const localLinkCommands = ({ cwd }) => {
+  console.log('Done !!');
+  if (process.argv[4] === 'link') {
+    exec(`npm install ${path.join(__dirname, '..', 'tslib-cli', 'osdevisnot-tslib-cli-v*.tgz')}`, { cwd });
   }
+};
+
+const moroRepoCommands = ({ cwd, monowd }) => {
+  ['gitignore', 'gitattributes'].map((file) => fs.unlinkSync(path.join(monowd, file)));
+  localLinkCommands({ cwd: monowd });
+  exec(process.argv[4] === 'link' ? 'npm install' : 'yarn --prefer-offline', { cwd });
+};
+
+const bareRepoCommands = ({ dest, cwd }) => {
+  ['gitignore', 'gitattributes'].map((file) => fs.renameSync(path.join(process.cwd(), dest, file), path.join(process.cwd(), dest, `.${file}`)));
+  localLinkCommands({ cwd });
+  exec('git init', { cwd });
+  exec(`git config user.name ${username}`, { cwd });
+  exec(`git config user.email ${email}`, { cwd });
+  exec(process.argv[4] === 'link' ? 'npm install' : 'yarn --prefer-offline', { cwd });
+  exec('git add .', { cwd });
+  exec("git commit -am 'fist commit'", { cwd });
+};
+
+if (dest) {
+  const isMonorepo = fs.existsSync(path.join(process.cwd(), 'lerna.json'));
+  let cwd = isMonorepo ? path.join(process.cwd(), 'packages', dest) : path.join(process.cwd(), dest);
   ncp(path.join(__dirname, template), cwd, { transform, clobber: false }, (err) => {
     if (err) {
       console.error(err);
       process.exit(1);
     }
-    fs.renameSync(path.join(process.cwd(), dest, 'gitignore'), path.join(process.cwd(), dest, '.gitignore'));
-    console.log('Done !!');
-    if (process.argv[4] === 'link') {
-      exec(`npm install ${path.join(__dirname, '..', 'tslib-cli', 'osdevisnot-tslib-cli-v*.tgz')}`, { cwd });
-    }
-    exec('git init', { cwd });
-    exec(`git config user.name ${username}`, { cwd });
-    exec(`git config user.email ${email}`, { cwd });
-    exec(process.argv[4] === 'link' ? 'npm install' : 'yarn', { cwd });
-    exec('git add .', { cwd });
-    exec("git commit -am 'fist commit'", { cwd });
+    if (isMonorepo && template !== 'template-monorepo') {
+      cwd = path.join(process.cwd());
+      const monowd = path.join(process.cwd(), 'packages', dest);
+      moroRepoCommands({ dest, cwd, monowd });
+    } else bareRepoCommands({ dest, cwd });
     process.exit(0);
   });
 } else {

@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+set -x
+
 yarn run setup
 
 cd ~/temp
@@ -15,6 +17,18 @@ yarn coverage
 yarn format
 yarn lint
 
-# test
-# watch
-# start
+
+cd ~/temp
+
+rm -rf mymono
+
+create-tslib mymono monorepo link
+
+cd mymono
+
+create-tslib mylib default link
+
+yarn build
+yarn coverage
+yarn format
+yarn lint

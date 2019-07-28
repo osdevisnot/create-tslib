@@ -19,9 +19,9 @@
     "presetup": "git clean -fdX",
     "setup": "yarn --prefer-offline",
     "postsetup": "yarn sort",
-    "presort": "sort-package-json",
+    "presort": "sort-package-json && lerna exec 'sort-package-json'",
     "sort": "cd packages/create-tslib/template-default && sort-package-json",
-    "postsort": "lerna exec 'sort-package-json'"
+    "postsort": "cd packages/create-tslib/template-monorepo && sort-package-json"
   },
   "devDependencies": {
     "lerna": "^3.16.4",

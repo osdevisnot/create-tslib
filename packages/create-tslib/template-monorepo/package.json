@@ -10,20 +10,29 @@
   "license": "MIT",
   "author": "username <useremail>",
   "scripts": {
+    "bootstrap": "lerna bootstrap",
     "build": "lerna run build",
     "coverage": "tslib-cli coverage",
     "format": "lerna run format",
+    "postinstall": "yarn sort",
     "lint": "lerna run lint",
-    "prepare": "lerna bootstrap",
+    "prepare": "yarn bootstrap",
     "prepublishOnly": "yarn lint && yarn coverage",
+    "presetup": "git clean -fdX",
+    "setup": "yarn --prefer-offline",
+    "postsetup": "yarn sort",
+    "sort": "sort-package-json",
+    "postsort": "lerna exec sort-package-json",
     "test": "tslib-cli test",
     "preversion": "yarn lint",
     "postversion": "git push --follow-tags"
   },
   "prettier": "@osdevisnot/prettier",
   "devDependencies": {
-    "@osdevisnot/tslib-cli": "^0.1.4",
+    "@osdevisnot/tslib-cli": "^0.1.6",
     "@types/jest": "^24.0.15",
-    "@types/node": "^12.6.8"
+    "@types/node": "^12.6.8",
+    "lerna": "^3.16.4",
+    "sort-package-json": "^1.22.1"
   }
 }
