@@ -8,8 +8,8 @@
   "repository": "username/template-default",
   "license": "MIT",
   "author": "username <useremail>",
-  "main": "dist/template-default.js",
-  "module": "dist/template-default.mjs",
+  "main": "dist/index.js",
+  "module": "dist/index.mjs",
   "source": "src/index.tsx",
   "types": "dist/index.d.ts",
   "scripts": {

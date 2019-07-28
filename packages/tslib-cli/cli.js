@@ -32,5 +32,14 @@ while ((command = process.argv.pop())) {
     case 'lint':
       run(`${paths.bin('tslint')} --fix -t codeFrame -p tsconfig.json`);
       break;
+    case 'deploy':
+      process.env.NODE_ENV = 'production';
+      run(`${paths.bin('rollup')} -c`);
+      const ncp = require('ncp');
+      ncp(paths.app('public'), paths.app('dist'), { clobber: false }, (err) => {
+        if (err) console.log(err);
+      });
+      run('surge', { cwd: paths.app('dist') });
+      break;
   }
 }
