@@ -1,6 +1,6 @@
 {
   "name": "@osdevisnot/create-tslib",
-  "version": "0.2.1",
+  "version": "0.3.0",
   "description": "Maximum Overkill for Typescript Library Authors",
   "repository": "osdevisnot/create-tslib",
   "license": "MIT",
