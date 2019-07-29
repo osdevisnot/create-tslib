@@ -9,6 +9,7 @@ const read = require('readline-sync');
 
 const run = (command) => sync(command, { stdio: ['ignore', 'pipe', 'ignore'] }).toString();
 const exec = (command, options) => sync(command, { stdio: 'inherit', ...options });
+const pkg = require('./package.json');
 
 let username, email;
 
@@ -33,6 +34,7 @@ const transform = (read, write) =>
     .pipe(replaceStream(template, dest))
     .pipe(replaceStream('username', username))
     .pipe(replaceStream('useremail', email))
+    .pipe(replaceStream('version', `^${pkg.version}`))
     .pipe(write);
 
 const localLinkCommands = ({ cwd }) => {

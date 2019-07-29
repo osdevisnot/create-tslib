@@ -34,7 +34,7 @@ const config = (options) => ({
       typescript: require('typescript'),
     }),
     commonjs(),
-    options.replace && replace({ 'process.env.NODE_ENV': isDev ? JSON.stringify('development') : JSON.stringify('production') }),
+    (isDev || options.replace) && replace({ 'process.env.NODE_ENV': isDev ? JSON.stringify('development') : JSON.stringify('production') }),
     isDev && serve({ contentBase: ['dist', 'public'], historyApiFallback: true, port: 1234 }),
     isDev && livereload('dist'),
     (isDeploy || options.minify) &&
