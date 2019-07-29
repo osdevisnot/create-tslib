@@ -25,7 +25,6 @@ const config = (options) => ({
   external: options.external || external,
   plugins: [
     ...(options.plugins || []),
-    options.replace && replace({ 'process.env.NODE_ENV': isDev ? JSON.stringify('DEVELOPMENT') : JSON.stringify('PRODUCTION') }),
     json(),
     nodeResolve({
       mainFields: ['module', 'main'],
@@ -35,6 +34,7 @@ const config = (options) => ({
       typescript: require('typescript'),
     }),
     commonjs(),
+    options.replace && replace({ 'process.env.NODE_ENV': isDev ? JSON.stringify('development') : JSON.stringify('production') }),
     isDev && serve({ contentBase: ['dist', 'public'], historyApiFallback: true, port: 1234 }),
     isDev && livereload('dist'),
     (isDeploy || options.minify) &&
