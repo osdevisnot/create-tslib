@@ -11,6 +11,7 @@
   "main": "dist/index.js",
   "module": "dist/index.mjs",
   "source": "src/index.tsx",
+  "browser": "dist/index.min.js",
   "types": "dist/index.d.ts",
   "scripts": {
     "build": "tslib-cli build",

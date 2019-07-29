@@ -1,4 +1,5 @@
 const path = require('path');
+const del = require('del');
 const sync = require('child_process').execSync;
 
 const paths = {
@@ -9,7 +10,10 @@ const paths = {
 
 const run = (command, options) => sync(command, { stdio: 'inherit', ...options });
 
+const clean = (dir) => del.sync([paths.app(dir)]);
+
 module.exports = {
   paths,
   run,
+  clean,
 };

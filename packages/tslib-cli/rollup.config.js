@@ -7,6 +7,7 @@ const serve = require('rollup-plugin-serve');
 const livereload = require('rollup-plugin-livereload');
 const { terser } = require('rollup-plugin-terser');
 const filesize = require('rollup-plugin-filesize');
+const replace = require('rollup-plugin-replace');
 
 const isDev = !!process.env.ROLLUP_WATCH;
 const isDeploy = !!process.env.ROLLUP_DEPLOY;
@@ -24,18 +25,19 @@ const config = (options) => ({
   external: options.external || external,
   plugins: [
     ...(options.plugins || []),
+    options.replace && replace({ 'process.env.NODE_ENV': isDev ? JSON.stringify('DEVELOPMENT') : JSON.stringify('PRODUCTION') }),
     json(),
     nodeResolve({
       mainFields: ['module', 'main'],
     }),
     typescript({
-      tsconfigOverride: { include: [isDeploy ? 'public' : 'src'] },
+      tsconfigOverride: { include: [isDeploy ? 'public' : 'src'], compilerOptions: { declaration: !isDev && !isDeploy } },
       typescript: require('typescript'),
     }),
     commonjs(),
     isDev && serve({ contentBase: ['dist', 'public'], historyApiFallback: true, port: 1234 }),
     isDev && livereload('dist'),
-    isDeploy &&
+    (isDeploy || options.minify) &&
       terser({
         ecma: 6,
         mangle: {
@@ -46,4 +48,12 @@ const config = (options) => ({
   ].filter(Boolean),
 });
 
-module.exports = (bundles) => bundles.map((option) => config(option));
+const bundles = isDev
+  ? [{ input: 'public/index.tsx', output: { file: pkg.module, format: 'es' } }]
+  : [
+      { input: pkg.source, output: { file: pkg.browser, format: 'es' }, minify: true, replace: true },
+      { input: pkg.source, output: { file: pkg.module, format: 'es' } },
+      { input: pkg.source, output: { file: pkg.main, format: 'cjs' } },
+    ];
+
+module.exports = bundles.map((option) => config(option));
