@@ -9,8 +9,7 @@ const { terser } = require('rollup-plugin-terser');
 const filesize = require('rollup-plugin-filesize');
 const replace = require('rollup-plugin-replace');
 
-const isDev = !!process.env.ROLLUP_WATCH;
-const isDeploy = !!process.env.ROLLUP_DEPLOY;
+const command = process.env.command;
 
 const pkg = require(paths.app('package.json'));
 
@@ -30,30 +29,31 @@ const config = (options) => ({
       mainFields: ['module', 'main'],
     }),
     typescript({
-      tsconfigOverride: { include: [isDeploy ? 'public' : 'src'], compilerOptions: { declaration: !isDev && !isDeploy } },
+      tsconfigOverride: { include: [command === 'deploy' ? 'public' : 'src'], compilerOptions: { declaration: command === 'build' } },
       typescript: require('typescript'),
     }),
     commonjs(),
-    (isDev || options.replace) && replace({ 'process.env.NODE_ENV': isDev ? JSON.stringify('development') : JSON.stringify('production') }),
-    isDev && serve({ contentBase: ['dist', 'public'], historyApiFallback: true, port: 1234 }),
-    isDev && livereload('dist'),
-    (isDeploy || options.minify) &&
+    (command === 'start' || command === 'watch' || options.replace) && replace({ 'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV) }),
+    command === 'start' && serve({ contentBase: ['dist', 'public'], historyApiFallback: true, port: 1234 }),
+    command === 'start' && livereload('dist'),
+    (options.minify || command === 'deploy') &&
       terser({
         ecma: 6,
         mangle: {
           properties: { regex: new RegExp('^_') },
         },
       }),
-    !isDev && filesize(),
+    command !== 'start' && filesize(),
   ].filter(Boolean),
 });
 
-const bundles = isDev
-  ? [{ input: 'public/index.tsx', output: { file: pkg.module, format: 'es' } }]
-  : [
-      { input: pkg.source, output: { file: pkg.browser, format: 'es' }, minify: true, replace: true },
-      { input: pkg.source, output: { file: pkg.module, format: 'es' } },
-      { input: pkg.source, output: { file: pkg.main, format: 'cjs' } },
-    ];
+const bundles =
+  command === 'start'
+    ? [{ input: 'public/index.tsx', output: { file: pkg.module, format: 'es' } }]
+    : [
+        { input: pkg.source, output: { file: pkg.browser, format: 'es' }, minify: true, replace: true },
+        { input: pkg.source, output: { file: pkg.module, format: 'es' } },
+        { input: pkg.source, output: { file: pkg.main, format: 'cjs' } },
+      ];
 
 module.exports = bundles.map((option) => config(option));

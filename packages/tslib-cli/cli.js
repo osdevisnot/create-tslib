@@ -7,6 +7,7 @@ let command;
 const build = (flags) => run(`${paths.bin('rollup')} ${flags} ${paths.cli('rollup.config.js')}`);
 
 while ((command = process.argv.pop())) {
+  process.env.command = command;
   switch (command) {
     case 'build':
       process.env.NODE_ENV = 'production';
