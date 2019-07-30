@@ -1,4 +1,5 @@
 const path = require('path');
+const fs = require('fs');
 const del = require('del');
 const sync = require('child_process').execSync;
 
@@ -12,8 +13,11 @@ const run = (command, options) => sync(command, { stdio: 'inherit', ...options }
 
 const clean = (dir) => del.sync([paths.app(dir)]);
 
+const exists = (file, fallback) => (fs.existsSync(file) ? file : fallback);
+
 module.exports = {
   paths,
   run,
   clean,
+  exists,
 };

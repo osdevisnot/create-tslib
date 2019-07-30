@@ -1,4 +1,4 @@
-const { paths } = require('./utils');
+const { paths, exists } = require('./utils');
 const json = require('rollup-plugin-json');
 const nodeResolve = require('rollup-plugin-node-resolve');
 const typescript = require('rollup-plugin-typescript2');
@@ -49,11 +49,11 @@ const config = (options) => ({
 
 const bundles =
   command === 'start'
-    ? [{ input: 'public/index.tsx', output: { file: pkg.module, format: 'es' } }]
+    ? [{ input: exists('public/index.tsx', 'public/index.ts'), output: { file: pkg.module, format: 'es' } }]
     : [
-        { input: pkg.source, output: { file: pkg.browser, format: 'es' }, minify: true, replace: true },
-        { input: pkg.source, output: { file: pkg.module, format: 'es' } },
-        { input: pkg.source, output: { file: pkg.main, format: 'cjs' } },
-      ];
+        pkg.browser && { input: pkg.source, output: { file: pkg.browser, format: 'es' }, minify: true, replace: true },
+        pkg.module && { input: pkg.source, output: { file: pkg.module, format: 'es' } },
+        pkg.main && { input: pkg.source, output: { file: pkg.main, format: 'cjs' } },
+      ].filter(Boolean);
 
 module.exports = bundles.map((option) => config(option));
