@@ -45,13 +45,13 @@ const localLinkCommands = ({ cwd }) => {
 };
 
 const moroRepoCommands = ({ cwd, monowd }) => {
-  ['gitignore', 'gitattributes'].map((file) => fs.unlinkSync(path.join(monowd, file)));
+  ['gitignore'].map((file) => fs.unlinkSync(path.join(monowd, file)));
   localLinkCommands({ cwd: monowd });
   exec(process.argv[4] === 'link' ? 'npm install' : 'yarn --prefer-offline', { cwd });
 };
 
 const bareRepoCommands = ({ dest, cwd }) => {
-  ['gitignore', 'gitattributes'].map((file) => fs.renameSync(path.join(process.cwd(), dest, file), path.join(process.cwd(), dest, `.${file}`)));
+  ['gitignore'].map((file) => fs.renameSync(path.join(process.cwd(), dest, file), path.join(process.cwd(), dest, `.${file}`)));
   localLinkCommands({ cwd });
   exec('git init', { cwd });
   exec(`git config user.name ${username}`, { cwd });

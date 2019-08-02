@@ -42,8 +42,13 @@ const config = (options) => ({
         mangle: {
           properties: { regex: new RegExp('^_') },
         },
+        compress: {
+          drop_console: true,
+          drop_debugger: true,
+          passes: 3,
+        },
       }),
-    command !== 'start' && filesize(),
+    command !== 'start' && filesize({ showBrotliSize: true }),
   ].filter(Boolean),
 });
 
