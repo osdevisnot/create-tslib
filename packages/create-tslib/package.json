@@ -9,7 +9,7 @@
   },
   "dependencies": {
     "ncp": "^2.0.0",
-    "readline-sync": "^1.4.9",
+    "readline-sync": "^1.4.10",
     "replacestream": "^4.0.3"
   },
   "publishConfig": {

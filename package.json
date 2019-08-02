@@ -21,7 +21,10 @@
     "postsetup": "yarn sort",
     "presort": "sort-package-json && lerna exec 'sort-package-json'",
     "sort": "cd packages/create-tslib/template-default && sort-package-json",
-    "postsort": "cd packages/create-tslib/template-monorepo && sort-package-json"
+    "postsort": "cd packages/create-tslib/template-monorepo && sort-package-json",
+    "preupdates": "cd packages/create-tslib/template-default && ncu -u",
+    "updates": "cd packages/create-tslib/template-monorepo && ncu -u",
+    "postupdates": "ncu -u && lerna exec 'ncu -u' && yarn setup"
   },
   "devDependencies": {
     "lerna": "^3.16.4",
