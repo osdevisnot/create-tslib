@@ -1,0 +1,33 @@
+{
+  "name": "create-tslib",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Maximum Overkill for Typescript Library Authors",
+  "keywords": [
+    "create-tslib"
+  ],
+  "repository": "osdevisnot/create-tslib",
+  "license": "MIT",
+  "author": "osdevisnot <osdevisnot@gmail.com>",
+  "scripts": {
+    "prebootstrap": "lerna bootstrap",
+    "bootstrap": "cd packages/tslib-cli && yarn pack",
+    "postbootstrap": "cd packages/create-tslib && npm link",
+    "postinstall": "yarn sort",
+    "prepare": "yarn bootstrap",
+    "pub": "lerna publish",
+    "presetup": "git clean -fdX",
+    "setup": "yarn --prefer-offline",
+    "postsetup": "yarn sort",
+    "presort": "sort-package-json && lerna exec 'sort-package-json'",
+    "sort": "cd packages/create-tslib/template-default && sort-package-json",
+    "postsort": "cd packages/create-tslib/template-monorepo && sort-package-json",
+    "preupdates": "cd packages/create-tslib/template-default && ncu -u",
+    "updates": "cd packages/create-tslib/template-monorepo && ncu -u",
+    "postupdates": "ncu -u && lerna exec 'ncu -u' && yarn setup"
+  },
+  "devDependencies": {
+    "lerna": "^3.16.4",
+    "sort-package-json": "^1.22.1"
+  }
+}
