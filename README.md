@@ -1,5 +1,7 @@
 # create-tslib
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/osdevisnot/create-tslib.svg)](https://greenkeeper.io/)
+
 > Maximum Overkill for Typescript Library Authors
 
 ![create-tslib icon](/docs/create-tslib.jpeg)
