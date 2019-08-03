@@ -24,12 +24,12 @@ while ((command = process.argv.pop())) {
       break;
     case 'test':
       process.env.NODE_ENV = 'test';
-      run(`${paths.bin('jest')} --preset="ts-jest" --testEnvironment="jsdom" --watch`);
+      run(`${paths.bin('jest')} --config=${paths.cli('jest.config.js')} --watch`);
       break;
     case 'coverage':
       clean('coverage');
       process.env.NODE_ENV = 'test';
-      run(`${paths.bin('jest')} --preset="ts-jest" --testEnvironment="jsdom" --coverage`);
+      run(`${paths.bin('jest')} --config=${paths.cli('jest.config.js')} --coverage`);
       break;
     case 'format':
       run(`${paths.bin('prettier')} --write '{src,public,tests}/*.{ts,tsx}'`);
