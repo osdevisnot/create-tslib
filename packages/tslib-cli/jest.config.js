@@ -1,5 +1,8 @@
+import { paths } from './utils';
+
 module.exports = {
-  preset: 'ts-jest',
-  testEnvironment: 'jsdom',
   clearMocks: true,
+  preset: 'ts-jest',
+  rootDir: paths.app(),
+  testEnvironment: 'jsdom',
 };
