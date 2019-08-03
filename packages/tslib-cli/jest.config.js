@@ -1,4 +1,4 @@
-import { paths } from './utils';
+const { paths } = require('./utils');
 
 module.exports = {
   clearMocks: true,
