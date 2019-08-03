@@ -38,14 +38,15 @@ const transform = (read, write) =>
     .pipe(write);
 
 const localLinkCommands = ({ cwd }) => {
-  console.log('Done !!');
+  console.log('Done !! Now installing dependencies...');
   if (process.argv[4] === 'link') {
     exec(`npm install ${path.join(__dirname, '..', 'tslib-cli', 'osdevisnot-tslib-cli-v*.tgz')}`, { cwd });
   }
 };
 
 const moroRepoCommands = ({ cwd, monowd }) => {
-  ['gitignore'].map((file) => fs.unlinkSync(path.join(monowd, file)));
+  ['gitignore', '.vscode/launch.json'].map((file) => fs.unlinkSync(path.join(monowd, file)));
+  ['.vscode'].map((dir) => fs.rmdirSync(path.join(monowd, dir)));
   localLinkCommands({ cwd: monowd });
   exec(process.argv[4] === 'link' ? 'npm install' : 'yarn --prefer-offline', { cwd });
 };
@@ -68,6 +69,10 @@ if (dest) {
     if (err) {
       console.error(err);
       process.exit(1);
+    }
+    if (template === 'template-monorepo') {
+      const dir = path.join(process.cwd(), dest, 'packages');
+      if (!fs.existsSync(dir)) fs.mkdirSync(dir);
     }
     if (isMonorepo && template !== 'template-monorepo') {
       cwd = path.join(process.cwd());
