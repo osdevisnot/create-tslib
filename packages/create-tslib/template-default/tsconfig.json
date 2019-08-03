@@ -1,0 +1,15 @@
+{
+  "exclude": ["node_modules", "dist"],
+  "compilerOptions": {
+    "strict": false, // enable the strict mode :)
+    "outDir": "dist",
+    "target": "esnext",
+    "module": "esnext",
+    "moduleResolution": "node",
+    "declaration": true,
+    "jsx": "react",
+    "jsxFactory": "h", // change to React.createElement when using react
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true
+  }
+}
