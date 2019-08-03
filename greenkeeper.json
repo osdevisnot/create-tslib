@@ -1,0 +1,13 @@
+{
+  "groups": {
+    "default": {
+      "packages": [
+        "package.json",
+        "packages/create-tslib/package.json",
+        "packages/create-tslib/template-default/package.json",
+        "packages/create-tslib/template-monorepo/package.json",
+        "packages/tslib-cli/package.json"
+      ]
+    }
+  }
+}
