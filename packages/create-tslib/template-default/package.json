@@ -22,6 +22,7 @@
     "prepublishOnly": "tslib-cli lint && tslib-cli coverage",
     "start": "tslib-cli start",
     "test": "tslib-cli test",
+    "updates": "ncu -u",
     "preversion": "tslib-cli lint",
     "postversion": "git push --follow-tags",
     "watch": "tslib-cli watch"

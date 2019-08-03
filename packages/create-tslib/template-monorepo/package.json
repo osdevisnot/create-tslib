@@ -24,6 +24,8 @@
     "sort": "sort-package-json",
     "postsort": "lerna exec sort-package-json",
     "test": "tslib-cli test",
+    "updates": "ncu -u",
+    "postupdates": "lerna exec ncu -u",
     "preversion": "yarn lint",
     "postversion": "git push --follow-tags"
   },
