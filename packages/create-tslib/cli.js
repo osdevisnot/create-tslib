@@ -21,10 +21,15 @@ try {
   email = `${process.env.USER}@gmail.com`;
 }
 
-console.log('');
-username = read.question(`Enter your username : [${username}] `) || username;
-email = read.question(`Enter your email : [${email}] `) || email;
-console.log('');
+if (process.env.CI === 'true') {
+  username = 'travis';
+  email = 'travis@gmail.com';
+} else {
+  console.log('');
+  username = read.question(`Enter your username : [${username}] `) || username;
+  email = read.question(`Enter your email : [${email}] `) || email;
+  console.log('');
+}
 
 const dest = process.argv[2];
 let template = 'template-' + (process.argv[3] || 'default');

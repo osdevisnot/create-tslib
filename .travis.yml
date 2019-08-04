@@ -1,0 +1,8 @@
+language: node_js
+cache:
+  directories:
+    - node_modules
+node_js:
+  - "10"
+  - "12"
+script: cd /tmp && create-tslib mylib default link && cd /tmp/mylib && yarn build && yarn coverage && yarn format && yarn lint && cd /tmp && create-tslib mymono monorepo link && cd /tmp/mymono && create-tslib mylib default link && yarn build && yarn coverage && yarn format && yarn lint
