@@ -27,7 +27,7 @@
     "postupdates": "ncu -u && lerna exec 'ncu -u' && yarn setup"
   },
   "devDependencies": {
-    "lerna": "^3.16.4",
-    "sort-package-json": "^1.22.1"
+    "lerna": "3.16.4",
+    "sort-package-json": "1.22.1"
   }
 }
