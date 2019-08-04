@@ -9,6 +9,7 @@
   "license": "MIT",
   "author": "username <useremail>",
   "main": "dist/index.js",
+  "unpkg": "dist/index.min.js",
   "module": "dist/index.mjs",
   "source": "src/index.tsx",
   "browser": "dist/index.min.js",
