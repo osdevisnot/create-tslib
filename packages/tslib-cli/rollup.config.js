@@ -48,7 +48,7 @@ const config = (options) => ({
           passes: 3,
         },
       }),
-    command !== 'start' && filesize({ showBrotliSize: true }),
+    command !== 'start' && options.minify && filesize({ showBrotliSize: true }),
   ].filter(Boolean),
 });
 
