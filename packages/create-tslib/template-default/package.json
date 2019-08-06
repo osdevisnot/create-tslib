@@ -33,6 +33,6 @@
   "devDependencies": {
     "@osdevisnot/tslib-cli": "<version>",
     "@types/jest": "24.0.17",
-    "@types/node": "12.6.9"
+    "@types/node": "12.7.0"
   }
 }
