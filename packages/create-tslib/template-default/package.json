@@ -8,7 +8,7 @@
   "repository": "username/template-default",
   "license": "MIT",
   "author": "username <useremail>",
-  "files": [
+  "_files_": [
     "dist"
   ],
   "main": "dist/index.js",
