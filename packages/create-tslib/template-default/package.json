@@ -8,6 +8,9 @@
   "repository": "username/template-default",
   "license": "MIT",
   "author": "username <useremail>",
+  "files": [
+    "dist"
+  ],
   "main": "dist/index.js",
   "unpkg": "dist/index.min.js",
   "module": "dist/index.mjs",

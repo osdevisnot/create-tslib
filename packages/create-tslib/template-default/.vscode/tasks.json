@@ -1,0 +1,29 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "dependsOn": ["Test", "Start"],
+      "label": "build",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      }
+    },
+    {
+      "label": "Start",
+      "type": "npm",
+      "script": "start",
+      "presentation": {
+        "group": "default"
+      }
+    },
+    {
+      "label": "Test",
+      "type": "npm",
+      "script": "test",
+      "presentation": {
+        "group": "default"
+      }
+    }
+  ]
+}

@@ -39,7 +39,7 @@ const transform = (read, write) =>
     .pipe(replaceStream(template, dest))
     .pipe(replaceStream('username', username))
     .pipe(replaceStream('useremail', email))
-    .pipe(replaceStream('<version>', `^${pkg.version}`))
+    .pipe(replaceStream('<version>', `${pkg.version}`))
     .pipe(write);
 
 const localLinkCommands = ({ cwd }) => {
