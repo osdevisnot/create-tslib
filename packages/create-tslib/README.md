@@ -1,3 +1,3 @@
-# @osdevisnot/tslib-cli
+# @osdevisnot/create-tslib
 
 > Maximum Overkill for Typescript Library Authors.
