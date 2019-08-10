@@ -15,7 +15,7 @@
     "postbootstrap": "cd packages/create-tslib && npm link",
     "postinstall": "yarn sort",
     "prepare": "yarn bootstrap",
-    "pub": "lerna publish",
+    "pub": "lerna publish from-package",
     "presetup": "git clean -fdX",
     "setup": "yarn --prefer-offline",
     "postsetup": "yarn sort",
