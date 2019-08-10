@@ -26,8 +26,10 @@
     "updates": "cd packages/create-tslib/template-monorepo && ncu -u",
     "postupdates": "ncu -u && lerna exec 'ncu -u' && yarn setup"
   },
+  "prettier": "@osdevisnot/prettier",
   "devDependencies": {
     "lerna": "3.16.4",
-    "sort-package-json": "1.22.1"
+    "sort-package-json": "1.22.1",
+    "@osdevisnot/prettier": "0.2.0"
   }
 }

@@ -1,10 +1,6 @@
 {
-  "packages": [
-    "packages/*"
-  ],
+  "packages": ["packages/*"],
   "version": "0.4.3",
   "npmClient": "yarn",
-  "npmClientArgs": [
-    "--prefer-offline"
-  ]
+  "npmClientArgs": ["--prefer-offline"]
 }

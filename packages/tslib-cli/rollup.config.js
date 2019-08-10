@@ -18,7 +18,7 @@ let external = Object.keys({
   ...(pkg.peerDependencies || {}),
 });
 
-const config = (options) => ({
+const config = options => ({
   input: options.input,
   output: options.output,
   external: options.external || external,
@@ -29,12 +29,22 @@ const config = (options) => ({
       mainFields: ['module', 'main'],
     }),
     typescript({
-      tsconfigOverride: { include: [command === 'deploy' ? 'public' : 'src'], compilerOptions: { declaration: command === 'build' } },
+      useTsconfigDeclarationDir: true,
+      tsconfigOverride: {
+        include: [command === 'deploy' ? 'public' : 'src'],
+        compilerOptions: { declaration: command === 'build' },
+      },
       typescript: require('typescript'),
     }),
     commonjs(),
-    (command === 'start' || command === 'watch' || options.replace) && replace({ 'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV) }),
-    command === 'start' && serve({ contentBase: ['dist', 'public'], historyApiFallback: true, port: 1234 }),
+    (command === 'start' || command === 'watch' || options.replace) &&
+      replace({ 'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV) }),
+    command === 'start' &&
+      serve({
+        contentBase: ['dist', 'public'],
+        historyApiFallback: true,
+        port: 1234,
+      }),
     command === 'start' && livereload('dist'),
     (options.minify || command === 'deploy') &&
       terser({
@@ -54,11 +64,27 @@ const config = (options) => ({
 
 const bundles =
   command === 'start'
-    ? [{ input: exists('public/index.tsx', 'public/index.ts'), output: { file: pkg.module, format: 'es' } }]
+    ? [
+        {
+          input: exists('public/index.tsx', 'public/index.ts'),
+          output: { file: pkg.module, format: 'es' },
+        },
+      ]
     : [
-        pkg.browser && { input: pkg.source, output: { file: pkg.browser, format: 'es' }, minify: true, replace: true },
-        pkg.module && { input: pkg.source, output: { file: pkg.module, format: 'es' } },
-        pkg.main && { input: pkg.source, output: { file: pkg.main, format: 'cjs' } },
+        pkg.browser && {
+          input: pkg.source,
+          output: { file: pkg.browser, format: 'es' },
+          minify: true,
+          replace: true,
+        },
+        pkg.module && {
+          input: pkg.source,
+          output: { file: pkg.module, format: 'es' },
+        },
+        pkg.main && {
+          input: pkg.source,
+          output: { file: pkg.main, format: 'cjs' },
+        },
       ].filter(Boolean);
 
-module.exports = bundles.map((option) => config(option));
+module.exports = bundles.map(option => config(option));

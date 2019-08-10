@@ -9,9 +9,10 @@ const paths = {
   cli: (...p) => path.join(__dirname, ...p),
 };
 
-const run = (command, options) => sync(command, { stdio: 'inherit', ...options });
+const run = (command, options) =>
+  sync(command, { stdio: 'inherit', ...options });
 
-const clean = (dir) => del.sync([paths.app(dir)]);
+const clean = dir => del.sync([paths.app(dir)]);
 
 const exists = (file, fallback) => (fs.existsSync(file) ? file : fallback);
 

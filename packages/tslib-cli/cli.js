@@ -4,7 +4,8 @@ const { paths, run, clean } = require('./utils');
 
 let command;
 
-const build = (flags) => run(`${paths.bin('rollup')} ${flags} ${paths.cli('rollup.config.js')}`);
+const build = flags =>
+  run(`${paths.bin('rollup')} ${flags} ${paths.cli('rollup.config.js')}`);
 
 while ((command = process.argv.pop())) {
   process.env.command = command;
@@ -24,25 +25,35 @@ while ((command = process.argv.pop())) {
       break;
     case 'test':
       process.env.NODE_ENV = 'test';
-      run(`${paths.bin('jest')} --config=${paths.cli('jest.config.js')} --watch`);
+      run(
+        `${paths.bin('jest')} --config=${paths.cli('jest.config.js')} --watch`
+      );
       break;
     case 'coverage':
       clean('coverage');
       process.env.NODE_ENV = 'test';
-      run(`${paths.bin('jest')} --config=${paths.cli('jest.config.js')} --coverage`);
+      run(
+        `${paths.bin('jest')} --config=${paths.cli(
+          'jest.config.js'
+        )} --coverage`
+      );
       break;
     case 'format':
       run(`${paths.bin('prettier')} --write '{src,public,tests}/*.{ts,tsx}'`);
       break;
     case 'lint':
-      run(`${paths.bin('tslint')} --fix -t codeFrame -p tsconfig.json -c ${paths.cli('tslint.json')}`);
+      run(
+        `${paths.bin(
+          'tslint'
+        )} --fix -t codeFrame -p tsconfig.json -c ${paths.cli('tslint.json')}`
+      );
       break;
     case 'deploy':
       clean('dist');
       process.env.NODE_ENV = 'production';
       build('-c');
       const ncp = require('ncp');
-      ncp(paths.app('public'), paths.app('dist'), { clobber: false }, (err) => {
+      ncp(paths.app('public'), paths.app('dist'), { clobber: false }, err => {
         if (err) console.log(err);
       });
       run('surge', { cwd: paths.app('dist') });
