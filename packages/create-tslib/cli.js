@@ -50,7 +50,7 @@ const localLinkCommands = ({ cwd }) => {
 };
 
 const moroRepoCommands = ({ cwd, monowd }) => {
-  ['gitignore', '.vscode/launch.json'].map((file) => fs.unlinkSync(path.join(monowd, file)));
+  ['gitignore', '.vscode/launch.json', '.vscode/settings.json', '.vscode/tasks.json'].map((file) => fs.unlinkSync(path.join(monowd, file)));
   ['.vscode'].map((dir) => fs.rmdirSync(path.join(monowd, dir)));
   localLinkCommands({ cwd: monowd });
   exec(process.argv[4] === 'link' ? 'npm install' : 'yarn --prefer-offline', { cwd });
