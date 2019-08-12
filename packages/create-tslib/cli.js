@@ -42,7 +42,7 @@ const transform = (read, write) =>
     .pipe(replaceStream('username', username))
     .pipe(replaceStream('useremail', email))
     .pipe(replaceStream('<version>', `${pkg.version}`))
-    .pipe(replaceStream('_files_', 'files'))
+    .pipe(replaceStream('files__', 'files'))
     .pipe(write);
 
 const localLinkCommands = ({ cwd }) => {
@@ -53,9 +53,9 @@ const localLinkCommands = ({ cwd }) => {
         __dirname,
         '..',
         'tslib-cli',
-        'osdevisnot-tslib-cli-v*.tgz'
+        'osdevisnot-tslib-cli-v*.tgz',
       )}`,
-      { cwd }
+      { cwd },
     );
   }
 };
@@ -78,8 +78,8 @@ const bareRepoCommands = ({ dest, cwd }) => {
   ['gitignore'].map(file =>
     fs.renameSync(
       path.join(process.cwd(), dest, file),
-      path.join(process.cwd(), dest, `.${file}`)
-    )
+      path.join(process.cwd(), dest, `.${file}`),
+    ),
   );
   localLinkCommands({ cwd });
   exec('git init', { cwd });
@@ -116,7 +116,7 @@ if (dest) {
         moroRepoCommands({ dest, cwd, monowd });
       } else bareRepoCommands({ dest, cwd });
       process.exit(0);
-    }
+    },
   );
 } else {
   console.error("That did't go well. Try adding a destination parameter?");

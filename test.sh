@@ -2,6 +2,8 @@
 
 set -x
 
+export CI="travis"
+
 yarn run setup
 
 cd ~/temp
