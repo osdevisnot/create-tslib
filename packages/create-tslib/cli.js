@@ -53,7 +53,7 @@ const localLinkCommands = ({ cwd }) => {
         __dirname,
         '..',
         'tslib-cli',
-        'osdevisnot-tslib-cli-v*.tgz',
+        'osdevisnot-tslib-cli-*.tgz',
       )}`,
       { cwd },
     );
@@ -69,9 +69,7 @@ const moroRepoCommands = ({ cwd, monowd }) => {
   ].map(file => fs.unlinkSync(path.join(monowd, file)));
   ['.vscode'].map(dir => fs.rmdirSync(path.join(monowd, dir)));
   localLinkCommands({ cwd: monowd });
-  exec(process.argv[4] === 'link' ? 'npm install' : 'yarn --prefer-offline', {
-    cwd,
-  });
+  exec('npm install', { cwd });
 };
 
 const bareRepoCommands = ({ dest, cwd }) => {
@@ -85,9 +83,7 @@ const bareRepoCommands = ({ dest, cwd }) => {
   exec('git init', { cwd });
   exec(`git config user.name ${username}`, { cwd });
   exec(`git config user.email ${email}`, { cwd });
-  exec(process.argv[4] === 'link' ? 'npm install' : 'yarn --prefer-offline', {
-    cwd,
-  });
+  exec('npm install', { cwd });
   exec('git add .', { cwd });
   exec("git commit -am 'fist commit'", { cwd });
 };

@@ -10,10 +10,10 @@
 
 ## Usage
 
-Create a Typescript Library with yarn create command
+Create a Typescript Library with npm init command
 
 ```bash
-yarn create tslib mylib
+npm init @osdevisnot/tslib mylib
 ```
 
 or with NPM init

@@ -5,4 +5,4 @@ cache:
 node_js:
   - '10'
   - '12'
-script: yarn format && yarn lint && yarn build && yarn coverage
+script: npm run format && npm run lint && npm run build && npm run coverage

@@ -2,9 +2,7 @@
 
 set -x
 
-export CI="travis"
-
-yarn run setup
+npm run setup
 
 cd ~/temp
 
@@ -14,10 +12,10 @@ create-tslib mylib default link
 
 cd mylib
 
-yarn build
-yarn coverage
-yarn format
-yarn lint
+npm run build
+npm run coverage
+npm run format
+npm run lint
 
 
 cd ~/temp
@@ -30,7 +28,7 @@ cd mymono
 
 create-tslib mylib default link
 
-yarn build
-yarn coverage
-yarn format
-yarn lint
+npm run build
+npm run coverage
+npm run format
+npm run lint
