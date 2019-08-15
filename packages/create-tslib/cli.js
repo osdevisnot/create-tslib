@@ -86,7 +86,7 @@ const bareRepoCommands = ({ dest, cwd }) => {
   exec(`git config user.email ${email}`, { cwd });
   exec(`${hasPNPM ? 'pnpm' : 'npm'} install`, { cwd });
   exec('git add .', { cwd });
-  exec("git commit -am 'fist commit'", { cwd });
+  exec("git commit -am 'Unleash the Kraken'", { cwd });
 };
 
 if (dest) {
