@@ -2,7 +2,7 @@
 
 set -x
 
-npm run setup
+# npm run setup
 
 cd ~/temp
 

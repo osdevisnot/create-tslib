@@ -5,6 +5,7 @@ const fs = require('fs');
 const ncp = require('ncp');
 const replaceStream = require('replacestream');
 const sync = require('child_process').execSync;
+const hasPNPM = require('command-exists').sync('pnpm');
 const read = require('readline-sync');
 
 const run = command =>
@@ -49,7 +50,7 @@ const localLinkCommands = ({ cwd }) => {
   console.log('Done !! Now installing dependencies...');
   if (process.argv[4] === 'link') {
     exec(
-      `npm install ${path.join(
+      `${hasPNPM ? 'pnpm' : 'npm'} install ${path.join(
         __dirname,
         '..',
         'tslib-cli',
@@ -69,7 +70,7 @@ const moroRepoCommands = ({ cwd, monowd }) => {
   ].map(file => fs.unlinkSync(path.join(monowd, file)));
   ['.vscode'].map(dir => fs.rmdirSync(path.join(monowd, dir)));
   localLinkCommands({ cwd: monowd });
-  exec('npm install', { cwd });
+  exec(`${hasPNPM ? 'pnpm' : 'npm'} install`, { cwd });
 };
 
 const bareRepoCommands = ({ dest, cwd }) => {
@@ -83,7 +84,7 @@ const bareRepoCommands = ({ dest, cwd }) => {
   exec('git init', { cwd });
   exec(`git config user.name ${username}`, { cwd });
   exec(`git config user.email ${email}`, { cwd });
-  exec('npm install', { cwd });
+  exec(`${hasPNPM ? 'pnpm' : 'npm'} install`, { cwd });
   exec('git add .', { cwd });
   exec("git commit -am 'fist commit'", { cwd });
 };

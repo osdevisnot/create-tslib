@@ -31,9 +31,16 @@
   "prettier": "@osdevisnot/prettier",
   "dependencies": {},
   "devDependencies": {
+    "@osdevisnot/prettier": "0.2.2",
     "@osdevisnot/tslib-cli": "<version>",
     "@types/jest": "24.0.17",
-    "@types/node": "12.7.1"
+    "@types/node": "12.7.1",
+    "jest": "24.8.0",
+    "prettier": "1.18.2",
+    "rollup": "1.19.4",
+    "ts-jest": "24.0.2",
+    "tslint": "5.18.0",
+    "typescript": "3.5.3"
   },
   "files__": [
     "dist"
