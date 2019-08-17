@@ -2,7 +2,7 @@
 
 set -x
 
-# npm run setup
+pnpm run setup
 
 cd ~/temp
 
@@ -12,10 +12,10 @@ create-tslib mylib default link
 
 cd mylib
 
-npm run build
-npm run coverage
-npm run format
-npm run lint
+pnpm run build
+pnpm run coverage
+pnpm run format
+pnpm run lint
 
 
 cd ~/temp
@@ -28,7 +28,7 @@ cd mymono
 
 create-tslib mylib default link
 
-npm run build
-npm run coverage
-npm run format
-npm run lint
+pnpm run build
+pnpm run coverage
+pnpm run format
+pnpm run lint

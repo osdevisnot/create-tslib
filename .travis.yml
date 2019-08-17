@@ -1,8 +1,27 @@
 language: node_js
-cache:
-  directories:
-    - node_modules
 node_js:
   - '10'
   - '12'
-script: cd /tmp && create-tslib mylib default link && cd /tmp/mylib && npm run build && npm run coverage && npm run format && npm run lint && cd /tmp && create-tslib mymono monorepo link && cd /tmp/mymono && create-tslib mylib default link && npm run build && npm run coverage && npm run format && npm run lint
+cache:
+  npm: false
+before_install:
+  - curl -L https://unpkg.com/@pnpm/self-installer | node
+install:
+  - pnpm install
+script:
+  - |
+    cd /tmp
+    create-tslib mylib default link
+    cd /tmp/mylib
+    pnpm run build
+    pnpm run coverage
+    pnpm run format
+    pnpm run lint
+    cd /tmp 
+    create-tslib mymono monorepo link
+    cd /tmp/mymono
+    create-tslib mylib default link
+    pnpm run build
+    pnpm run coverage
+    pnpm run format
+    pnpm run lint

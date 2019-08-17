@@ -10,26 +10,26 @@
   "license": "MIT",
   "author": "osdevisnot <osdevisnot@gmail.com>",
   "scripts": {
-    "prebootstrap": "lerna bootstrap",
     "bootstrap": "cd packages/tslib-cli && pnpm pack",
     "postbootstrap": "cd packages/create-tslib && pnpm link",
     "postinstall": "pnpm run sort",
     "prepare": "pnpm run bootstrap",
-    "pub": "lerna publish",
+    "prepub": "pnpm run setup",
+    "pub": "pnpm recursive exec -- pnpm version patch",
+    "postpub": "pnpm recursive exec -- pnpm publish",
     "presetup": "git clean -fdX",
     "setup": "pnpm install",
-    "postsetup": "pnpm run sort",
-    "presort": "sort-package-json && lerna exec 'sort-package-json'",
+    "postsetup": "pnpm recursive install",
+    "presort": "pnpm recursive exec -- sort-package-json",
     "sort": "cd packages/create-tslib/template-default && sort-package-json",
     "postsort": "cd packages/create-tslib/template-monorepo && sort-package-json",
     "preupdates": "cd packages/create-tslib/template-default && ncu -u",
     "updates": "cd packages/create-tslib/template-monorepo && ncu -u",
-    "postupdates": "ncu -u && lerna exec 'ncu -u' && pnpm run setup"
+    "postupdates": "pnpm recursive exec -- ncu -u"
   },
   "prettier": "@osdevisnot/prettier",
   "devDependencies": {
     "@osdevisnot/prettier": "0.2.2",
-    "lerna": "3.16.4",
     "prettier": "1.18.2",
     "sort-package-json": "1.22.1"
   }

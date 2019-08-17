@@ -90,7 +90,9 @@ const bareRepoCommands = ({ dest, cwd }) => {
 };
 
 if (dest) {
-  const isMonorepo = fs.existsSync(path.join(process.cwd(), 'lerna.json'));
+  const isMonorepo = fs.existsSync(
+    path.join(process.cwd(), 'pnpm-workspace.yaml'),
+  );
   let cwd = isMonorepo
     ? path.join(process.cwd(), 'packages', dest)
     : path.join(process.cwd(), dest);
