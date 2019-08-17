@@ -5,4 +5,5 @@ module.exports = {
   preset: 'ts-jest',
   rootDir: paths.app(),
   testEnvironment: 'jsdom',
+  coveragePathIgnorePatterns: ['/node_modules/', '/dist/'],
 };
