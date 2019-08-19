@@ -33,7 +33,7 @@
   "devDependencies": {
     "@osdevisnot/prettier": "0.2.2",
     "@osdevisnot/tslib-cli": "<version>",
-    "@types/jest": "24.0.17",
+    "@types/jest": "24.0.18",
     "@types/node": "12.7.2",
     "jest": "24.9.0",
     "prettier": "1.18.2",
